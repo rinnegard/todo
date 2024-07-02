@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Input from "./input";
 import { Todo } from "./types";
 import TodoList from "./todo-list";
+import Header from "../components/header";
 
 function TodoPage() {
     const [todos, setTodos] = useState<Todo[]>([]);
@@ -37,8 +38,8 @@ function TodoPage() {
     }, [todos]);
 
     return (
-        <main className="container flex justify-center mx-auto flex-col p-4">
-            <h1 className="text-3xl font-bold text-center pb-5">Todos</h1>
+        <main className="container flex justify-center mx-auto flex-col p-4 pt-0">
+            <Header title="Todo"></Header>
             <Input onSubmit={handleSubmit}></Input>
             <TodoList
                 todos={todos}

@@ -67,7 +67,7 @@ function Todo({ todo, onDelete, onUpdate }: TodoProps) {
                     <span
                         onDoubleClick={() => setIsEdit(true)}
                         className={
-                            "block w-full" +
+                            "block w-full " +
                             (todo.completed ? "line-through" : "")
                         }
                     >

@@ -2,6 +2,7 @@
 
 import Button from "@/app/components/button";
 import { useEffect, useRef, useState } from "react";
+import Header from "./components/header";
 
 function HomePage() {
     const someRef = useRef<HTMLHeadingElement>(null);
@@ -38,13 +39,8 @@ function HomePage() {
     }, []);
 
     return (
-        <div className="px-10">
-            <h1
-                ref={someRef}
-                className="font-bold text-center text-4xl bg-gray-800 text-blue-200"
-            >
-                Hello
-            </h1>
+        <div className="container mx-auto flex-col p-4 pt-0">
+            <Header title="Home"></Header>
             <Button
                 disabled={plusDisabled}
                 onClick={(e) => setCount((prev) => prev + 1)}
