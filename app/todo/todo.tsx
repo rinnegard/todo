@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { type Todo } from "@prisma/client";
 import { deleteTodo, updateTodo } from "./actions";
+import Link from "next/link";
 
 export type TodoProps = {
     todo: Todo;
@@ -80,6 +81,12 @@ function Todo({ todo }: TodoProps) {
                         {todo.value}
                     </span>
                 )}
+                <Link
+                    className="pe-2 underline text-blue-800"
+                    href={`todo/${todo.id}`}
+                >
+                    Details
+                </Link>
             </div>
             <button
                 onClick={handleDelete}

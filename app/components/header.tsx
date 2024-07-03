@@ -10,7 +10,7 @@ function Header({ title }: { title: string }) {
                         <Link href={"/"}>Home</Link>
                     </li>
                     <li>
-                        <Link href={"todo"}>Todo</Link>
+                        <Link href={"/todo"}>Todo</Link>
                     </li>
                 </ul>
             </nav>

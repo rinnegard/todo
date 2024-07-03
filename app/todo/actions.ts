@@ -41,3 +41,11 @@ export async function updateTodo(id: string, newTodo: UpdateTodo) {
 
     revalidatePath("/todo");
 }
+
+export async function getTodo(id: string) {
+    return await prisma.todo.findUnique({
+        where: {
+            id,
+        },
+    });
+}
