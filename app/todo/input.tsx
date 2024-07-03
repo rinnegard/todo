@@ -1,30 +1,20 @@
+"use client";
 import { useState } from "react";
-import { Todo } from "./types";
+import { createTodo } from "./actions";
 
-export type InputProps = {
-    onSubmit?: (todo: Todo) => void;
-};
+export type InputProps = {};
 
-let index = 0;
-
-function Input({ onSubmit }: InputProps) {
+function Input({}: InputProps) {
     const [todo, setTodo] = useState("");
 
-    function handleSubmit() {
+    async function handleSubmit() {
         let trimmedTodo = todo.trim();
         if (!trimmedTodo) {
             setTodo("");
             return;
         }
-        const todoObj: Todo = {
-            id: ++index,
-            value: trimmedTodo,
-            completed: false,
-        };
 
-        if (onSubmit) {
-            onSubmit(todoObj);
-        }
+        await createTodo(trimmedTodo);
 
         setTodo("");
     }

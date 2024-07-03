@@ -1,36 +1,42 @@
-import { useRef, useState } from "react";
-import { type Todo } from "./types";
+"use client";
+import { useEffect, useState } from "react";
+import { type Todo } from "@prisma/client";
+import { deleteTodo, updateTodo } from "./actions";
 
 export type TodoProps = {
     todo: Todo;
-    onDelete?: (id: number) => void;
-    onUpdate?: (updatedTodo: Todo) => void;
 };
 
-function Todo({ todo, onDelete, onUpdate }: TodoProps) {
+function Todo({ todo }: TodoProps) {
     const [isEdit, setIsEdit] = useState(false);
 
-    function handleDelete() {
+    useEffect(() => {
+        console.log(todo);
+    }, [todo]);
+
+    async function handleDelete() {
         const answer = confirm("Are you sure you want to delete?");
         if (answer) {
-            onDelete?.(todo.id);
+            await deleteTodo(todo.id);
         }
     }
 
-    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const newTodo: Todo = { ...todo, completed: !todo.completed };
-
-        onUpdate?.(newTodo);
+    async function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+        await updateTodo(todo.id, {
+            value: todo.value,
+            completed: !todo.completed,
+        });
     }
 
-    function handleBlur(newValue: string) {
+    async function handleBlur(newValue: string) {
         if (!newValue) {
             setIsEdit(false);
             return;
         }
 
-        const newTodo: Todo = { ...todo, value: newValue };
-        onUpdate?.(newTodo);
+        await updateTodo(todo.id, {
+            value: newValue,
+        });
         setIsEdit(false);
     }
     return (

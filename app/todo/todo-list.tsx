@@ -1,24 +1,16 @@
+import prisma from "@/lib/prisma";
 import Todo from "./todo";
-import { Todo as TTodo } from "./types";
 
-export type TodoListProps = {
-    todos: TTodo[];
-    onDelete?: (id: number) => void;
-    onUpdate?: (newTodo: TTodo) => void;
-};
+export type TodoListProps = {};
 
-function TodoList({ todos, onDelete, onUpdate }: TodoListProps) {
+async function TodoList({}: TodoListProps) {
+    const todos = await prisma.todo.findMany({
+        orderBy: { createdAt: "desc" },
+    });
     return (
         <ul className="my-5 space-y-2">
             {todos.map((todo) => {
-                return (
-                    <Todo
-                        onDelete={onDelete}
-                        onUpdate={onUpdate}
-                        todo={todo}
-                        key={`todo-item-${todo.id}`}
-                    ></Todo>
-                );
+                return <Todo todo={todo} key={`todo-item-${todo.id}`}></Todo>;
             })}
         </ul>
     );
