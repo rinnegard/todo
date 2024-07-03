@@ -43,7 +43,7 @@ export async function updateTodo(id: string, newTodo: UpdateTodo) {
 }
 
 export async function getTodo(id: string) {
-    return await prisma.todo.findUnique({
+    return await prisma.todo.findUniqueOrThrow({
         where: {
             id,
         },

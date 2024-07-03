@@ -7,6 +7,7 @@ async function TodoList({}: TodoListProps) {
     const todos = await prisma.todo.findMany({
         orderBy: { createdAt: "desc" },
     });
+
     return (
         <ul className="my-5 space-y-2">
             {todos.map((todo) => {

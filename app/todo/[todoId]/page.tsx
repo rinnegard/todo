@@ -1,6 +1,6 @@
 import Header from "@/app/components/header";
 import { getTodo } from "../actions";
-import { revalidatePath } from "next/cache";
+import { notFound } from "next/navigation";
 
 export type TodoDetailsPageProps = {
     params: {
@@ -10,7 +10,10 @@ export type TodoDetailsPageProps = {
 
 export default async function TodoDetails({ params }: TodoDetailsPageProps) {
     const todo = await getTodo(params.todoId);
-    revalidatePath("/todo/" + params.todoId);
+
+    if (!todo) {
+        notFound();
+    }
 
     return (
         <div>
