@@ -12,6 +12,12 @@ function Header({ title }: { title: string }) {
                     <li>
                         <Link href={"/todo"}>Todo</Link>
                     </li>
+                    <li>
+                        <Link href={"/sign-up"}>Sign up</Link>
+                    </li>
+                    <li>
+                        <Link href={"/sign-in"}>Sign in</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
